@@ -7,7 +7,6 @@ const hbs = require('hbs')
 const app = express();
 const router = require('./controllers/index')
 const partials = __dirname +  '/partials'
-const 
 
 hbs.registerPartials(partials)
 app.use(bodyParser.urlencoded({ extended: false }))
