@@ -1,0 +1,29 @@
+{
+  "name": "segundaentrega",
+  "version": "1.0.0",
+  "description": "Segunda entrega NodeJS",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.16.4",
+    "hbs": "^4.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./src/apps -e js,hbs,json",
+    "debug": "nodemon --inspect ./src/apps -e js,hbs,json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Neofenix/SegundaEntrega.git"
+  },
+  "keywords": [
+    "NodeJS"
+  ],
+  "author": "Juan Zapata",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Neofenix/SegundaEntrega/issues"
+  },
+  "homepage": "https://github.com/Neofenix/SegundaEntrega#readme"
+}

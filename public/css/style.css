@@ -1,0 +1,21 @@
+body{
+	color: #grey;
+	font-family: arial;
+	min-height: 100vh
+}
+
+footer{
+	color: black;
+	border-top: 2px solid black;
+	min-height: 16px;
+}
+
+header{
+	margin-top: 16px;
+	margin-bottom: 48px;
+}
+
+header{
+	font-size: 48px;
+	margin-bottom: 48px
+}

@@ -1,0 +1,22 @@
+{{>header}}
+<p>Formulario para registrar un usuario nuevo</p>
+
+<form action="/registrar" method="post">
+  <fieldset>
+    <legend>Registro de usuario</legend>
+    Documento de identidad:<br>
+    <input type="number" name="documento" required>
+    <br>
+    Nombre:<br>
+    <input type="text" name="nombre" required>
+    <br>
+    Correo:<br>
+    <input type="email" name="correo">
+    <br>
+    Telefono:<br>
+    <input type="tel" name="telefono">
+    <br>
+    <input type="submit" value="Enviar">
+  </fieldset>
+</form>
+{{>footer}}
