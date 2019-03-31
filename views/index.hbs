@@ -1,0 +1,15 @@
+{{>header}}
+<h2>Pagina de inicio</h2>
+<form action="/rol" method="post">
+  <select name="roles">
+    <option value="coordinador">coordinador</option>
+    <option value="aspirante">aspirante</option>
+    <option value="interesado">interesado</option>
+  </select>
+  <input type="submit" name='Ingresar'>
+</form>
+<form action="/formregistrousuario" method="post">
+  <input type="submit" value="Registrar usuario" name="registrar usuario"></option>
+</form>
+<br></br>
+{{>footer}}

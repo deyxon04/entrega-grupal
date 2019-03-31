@@ -1,21 +1,57 @@
-body{
+body {
 	color: #grey;
 	font-family: arial;
 	min-height: 100vh
 }
 
-footer{
+footer {
 	color: black;
 	border-top: 2px solid black;
 	min-height: 16px;
 }
 
-header{
+header {
 	margin-top: 16px;
 	margin-bottom: 48px;
 }
 
-header{
+header {
 	font-size: 48px;
 	margin-bottom: 48px
+}
+
+ul {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
+}
+
+li {
+	float: left;
+}
+
+li a {
+	display: block;
+	color: white;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+li a:hover {
+	background-color: #111;
+}
+
+table {
+	font-family: arial, sans-serif;
+	border-collapse: collapse;
+	width: 100%;
+}
+
+td, th {
+	border: 1px solid #dddddd;
+	text-align: left;
+	padding: 8px;
 }

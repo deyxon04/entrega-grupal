@@ -1,0 +1,30 @@
+{{>header}}
+<p>Formulario para crear un nuevo curso</p>
+<form action="/registrarcurso" method="post">
+  <fieldset>
+    <legend>Registro de curso</legend>
+    Nombre del curso:<br>
+    <input type="text" name="nomcurso" required>
+    <br>
+    Identificacion del curso:<br>
+    <input type="number" name="idcurso" required>
+    <br>
+    Descripcion:<br>
+    <input type="text" name="descripcion" required>
+    <br>
+    Valor:<br>
+    <input type="number" name="valor" required>
+    <br>
+    Modalidad:<br>
+    <select name="modalidad">
+      <option value="virtual" selected>Virtual</option>
+      <option value="value2">Presencial</option>
+    </select>
+    <br>
+    Intensidad Horario:<br>
+    <input type="number" name="intensidad"> Horas
+    <br>
+    <input type="submit" value="Enviar" required>
+  </fieldset>
+</form>
+{{>footer}}

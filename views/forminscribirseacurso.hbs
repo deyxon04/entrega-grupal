@@ -1,0 +1,27 @@
+{{>header}}
+<p>Formulario para inscribirse a un curso</p>
+<form action="/registrarusuarioacurso" method="post">
+  <fieldset>
+    <legend>Inscripcion a curso</legend>
+    Documento de identidad:<br>
+    <input type="number" name="documento" required>
+    <br>
+    Nombre:<br>
+    <input type="text" name="nombre" required>
+    <br>
+    Correo electronico:<br>
+    <input type="email" name="correo">
+    <br>
+    Telefono:<br>
+    <input type="tel" name="telefono">
+    <br>
+    <select name="curso">
+    {{#cursosdisponibles this}}
+      <option value="{{nombrecurso}}">{{nombrecurso}}</option>
+    {{/cursosdisponibles}}
+  </select>
+    <br>
+    <input type="submit" value="Enviar">
+  </fieldset>
+</form>
+{{>footer}}

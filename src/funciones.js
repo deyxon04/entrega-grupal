@@ -1,121 +1,128 @@
-const fs = require ('fs')
-listaUsuarios = [];
+const fs = require('fs')
+lista = [];
 
 registrarUsuario = (...args) => {
 	listar();
-    let usuario = {
-		documento:args[0],
+	let usuario = {
+		documento: args[0],
 		nombre: args[1],
-		correo:args[2],
-		telefono:args[3],
-		tipo:'aspirante'
+		correo: args[2],
+		telefono: args[3],
+		tipo: 'aspirante'
 	};
-	let duplicado = listaUsuarios.find(doc => doc.documento == args[0])
-	if(!duplicado){
-	listaUsuarios.push(usuario);
-	guardar();
+	let duplicado = lista.find(doc => doc.documento == args[0])
+	if (!duplicado) {
+		lista.push(usuario);
+		guardar();
 	}
-	else{
+	else {
 		throw ('Ya existe otro usuario con ese documento ')
 	}
 }
 
-const listar = () => {
-	try{
-		listaUsuarios = require('../listadousuarios.json');
-		console.log('test:' + listaUsuarios)
-	//listaEstudiantes = JSON.parse(fs.readFileSync('listado.json'));
+registrarCurso = (...args) => {
+	listar(tipo = 'cursos');
+	let curso = {
+		nombrecurso: args[0],
+		idcurso: args[1],
+		descripcion: args[2],
+		valor: args[3],
+		modalidad: args[4],
+		intensidad: args[5],
+		estado: 'disponible'
+	};
+	let duplicado = lista.find(id => id.idcurso == args[1])
+	if (!duplicado) {
+		lista.push(curso);
+		guardar(tipo = 'cursos');
 	}
-	catch(error){
-		listaUsuarios = []
+	else {
+		throw ('Ya existe otro curso con ese id ')
 	}
 }
 
-const promedioEstudiante = (nom) =>{
-	listar()
-	let est = listaUsuarios.find(buscar => buscar.nombre == nom)
-	if(!est){
-	console.log('No existe el estudiante');
-	}
-	else{
-		console.log('promedio del estudiante: ')
-		console.log(promedio(est));
-	}
-} 
-
-const estudiantesAprobaron = () =>{
-	listar()
-	console.log('nombre de los estudiantes que han ganado: ')
-	listaUsuarios.forEach(estudiante => {
-		let promedioestudiante = promedio(estudiante)
-		if(promedioestudiante > 3){
-			console.log('nombre ' + estudiante.nombre)
+registrarUsuarioAcurso = (...args) => {
+	listar(tipo = 'usuario');
+	listausuario = lista.slice()
+	listar(tipo = 'usuarioporcurso')
+	listausuarioporcurso = lista.slice()
+	let curso = {
+		documento: args[0],
+		nombre: args[1],
+		correo: args[2],
+		telefono: args[3],
+		curso: args[4],
+	};
+	busqueda = doc => doc.documento === args[0]
+	let existeusuario = listausuario.find(busqueda)
+	let estainscrito = listausuarioporcurso.find(buscar =>(buscar.documento === args[0] && buscar.curso === args[4]))
+	if (existeusuario) {
+		if(!estainscrito){
+		lista.push(curso);
+		guardar(tipo = 'usuarioporcurso');
 		}
-});
+		else{
+			throw ('Ya esta inscrito en el curso')
+		}
+	}
+	else {
+		throw ('Debe registrarse previamente como usuario para inscribirse al curso')
+	}
 }
 
-const promedio = (est) =>{
-	let promedio =  (est.matematicas + est.ingles + est.programacion)/3;
-	return promedio
+
+const listar = (tipo = 'usuario') => {
+	try {
+		if (tipo === 'cursos') {
+			lista = require('../listadecursos.json')
+		}
+		else if (tipo === 'usuarioporcurso') {
+			lista = require('../listadeusuariosporcurso.json')
+		}
+		else {
+			lista = require('../listadousuarios.json');
+		}
+		//listaEstudiantes = JSON.parse(fs.readFileSync('listado.json'));
+	}
+	catch (error) {
+		lista = []
+	}
 }
 
-const guardar = () => {
-	let datos = JSON.stringify(listaUsuarios);
-	fs.writeFile('listadousuarios.json', datos, (err) => {
+const guardar = (tipo = 'usuario') => {
+	let datos = JSON.stringify(lista);
+	if (tipo === 'cursos') {
+		nombreJson = 'listadecursos.json'
+	}
+	else if (tipo === 'usuarioporcurso') {
+		nombreJson = 'listadeusuariosporcurso.json'
+	} else {
+		nombreJson = 'listadousuarios.json'
+	}
+	fs.writeFile(nombreJson, datos, (err) => {
 		if (err) throw (err);
 		console.log('Archivo creado con éxito');
 	})
 }
 
-const mostrar = () => {
-	listar()
-    console.log('notas de los estudiantes')
-	listaUsuarios.forEach(estudiante => {
-		console.log(estudiante.nombre);
-		console.log('notas')
-		console.log('matematicas' + estudiante.matematicas)
-		console.log('ingles ' + estudiante.ingles)
-		console.log('programacion '+ estudiante.programacion + '\n')
-	});
+const mostrarCursos = () => {
+	listar(tipo = 'cursos');
+	return lista
 }
 
-const mostrarest = (nom) => {
-	listar()
-	let est = listaUsuarios.find(buscar => buscar.nombre == nom)
-	if(!est){
-	console.log('No existe el estudiante');
-	}
-	else{
-		console.log(est);
-		console.log('notas')
-		console.log('matematicas' + est.matematicas)
-		console.log('ingles ' + est.ingles)
-		console.log('programacion '+ est.programacion + '\n')
-	}
+const mostrarCursosDisponibles = () => {
+	listar(tipo = 'cursos');
+	let est = lista.filter(cursos => cursos.estado === 'disponible')
+	return est
 }
 
-const mostrarmat = () =>{
+const actualizar = (nom, asignatura, calificacion) => {
 	listar()
-	let ganan = listaUsuarios.filter(mat => mat.matematicas >=3)
-	if (ganan.length == 0){
-		console.log('ningun estudiante va ganando')
+	let encontrado = lista.find(buscar => buscar.nombre == nom)
+	if (!encontrado) {
+		console.log('Estudiante no existe')
 	}
-	else{
-		ganan.forEach(estudiante => {
-			console.log(estudiante.nombre);
-			console.log('notas')
-			console.log('matematicas ' + estudiante.matematicas)
-		});
-	}
-} 
-
-const actualizar = (nom, asignatura, calificacion) =>{
-	listar()
-	let encontrado = listaUsuarios.find(buscar => buscar.nombre == nom)
-	if(!encontrado){
-       console.log('Estudiante no existe')
-	}
-	else{
+	else {
 		encontrado[asignatura] = calificacion;
 		guardar()
 	}
@@ -123,24 +130,23 @@ const actualizar = (nom, asignatura, calificacion) =>{
 
 const eliminar = (nom) => {
 	listar()
-	let nuevo = listaUsuarios.filter(mat => mat.nombre != nom)
-	if (nuevo.length == listaUsuarios.length){
+	let nuevo = lista.filter(mat => mat.nombre != nom)
+	if (nuevo.length == lista.length) {
 		console.log('ningun estudiante tiene el nombre indicado')
 	}
-	else{
-		listaUsuarios = nuevo
+	else {
+		lista = nuevo
 		guardar()
 	}
-	
+
 }
 
 module.exports = {
 	registrarUsuario,
-	mostrar,
-	mostrarest,
-	mostrarmat,
-	promedioEstudiante,
-	estudiantesAprobaron,
+	registrarCurso,
+	registrarUsuarioAcurso,
+	mostrarCursos,
+	mostrarCursosDisponibles,
 	actualizar,
 	eliminar
 }

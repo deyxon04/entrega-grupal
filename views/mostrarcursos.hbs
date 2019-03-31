@@ -1,0 +1,24 @@
+{{>header}}
+<table>
+            <thead>
+               <th>Nombre</th> 
+               <th>Identificacion del curso</th> 
+               <th>Descripcion</th>
+               <th>Valor</th> 
+               <th>Intesidad horaria</th> 
+               <th>Estado</th> 
+            </thead>
+            <tbody>
+                {{#mostrarcursos this}}
+                    <tr>
+                      <td>{{nombrecurso}}</td> 
+                      <td>{{idcurso}}</td>
+                      <td>{{descripcion}}</td>
+                      <td>{{valor}}</td>
+                      <td>{{intensidad}} Horas</td>
+                      <td>{{estado}}</td>
+                    </tr>
+                {{/mostrarcursos}}
+            </tbody>
+        </table>
+{{>footer}}
