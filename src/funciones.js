@@ -44,8 +44,8 @@ registrarCurso = (...args) => {
 registrarUsuarioAcurso = (...args) => {
 	listar(tipo = 'usuario');
 	listausuario = lista.slice()
-	listar(tipo = 'usuarioporcurso')
-	listausuarioporcurso = lista.slice()
+	listar(tipo = 'matriculados')
+	listamatriculados = lista.slice()
 	let curso = {
 		documento: args[0],
 		nombre: args[1],
@@ -55,13 +55,13 @@ registrarUsuarioAcurso = (...args) => {
 	};
 	busqueda = doc => doc.documento === args[0]
 	let existeusuario = listausuario.find(busqueda)
-	let estainscrito = listausuarioporcurso.find(buscar =>(buscar.documento === args[0] && buscar.curso === args[4]))
+	let estainscrito = listamatriculados.find(buscar => (buscar.documento === args[0] && buscar.curso === args[4]))
 	if (existeusuario) {
-		if(!estainscrito){
-		lista.push(curso);
-		guardar(tipo = 'usuarioporcurso');
+		if (!estainscrito) {
+			lista.push(curso);
+			guardar(tipo = 'matriculados');
 		}
-		else{
+		else {
 			throw ('Ya esta inscrito en el curso')
 		}
 	}
@@ -76,8 +76,8 @@ const listar = (tipo = 'usuario') => {
 		if (tipo === 'cursos') {
 			lista = require('../listadecursos.json')
 		}
-		else if (tipo === 'usuarioporcurso') {
-			lista = require('../listadeusuariosporcurso.json')
+		else if (tipo === 'matriculados') {
+			lista = require('../listadematriculados.json')
 		}
 		else {
 			lista = require('../listadousuarios.json');
@@ -94,8 +94,8 @@ const guardar = (tipo = 'usuario') => {
 	if (tipo === 'cursos') {
 		nombreJson = 'listadecursos.json'
 	}
-	else if (tipo === 'usuarioporcurso') {
-		nombreJson = 'listadeusuariosporcurso.json'
+	else if (tipo === 'matriculados') {
+		nombreJson = 'listadematriculados.json'
 	} else {
 		nombreJson = 'listadousuarios.json'
 	}
@@ -116,6 +116,16 @@ const mostrarCursosDisponibles = () => {
 	return est
 }
 
+const mostrarInscritos = () => {
+	listar(tipo = 'matriculados');
+	return lista
+}
+
+const mostrarUsuarios = () => {
+	listar();
+	return lista
+}
+
 const actualizar = (nom, asignatura, calificacion) => {
 	listar()
 	let encontrado = lista.find(buscar => buscar.nombre == nom)
@@ -124,6 +134,24 @@ const actualizar = (nom, asignatura, calificacion) => {
 	}
 	else {
 		encontrado[asignatura] = calificacion;
+		guardar()
+	}
+}
+
+const cambiarRol = (valor) => {
+	listar();
+	datosusuario = valor.split("+")
+	let indice = lista.find(buscar => (buscar.documento == parseInt(datosusuario[0]) && buscar.tipo == datosusuario[1]));
+	if (!indice) {
+		console.log('Estudiante no existe')
+	}
+	else {
+		if (indice.tipo == 'aspirante') {
+			indice['tipo'] = 'docente';
+		}
+		else {
+			indice['tipo'] = 'aspirante';
+		}
 		guardar()
 	}
 }
@@ -141,12 +169,30 @@ const eliminar = (nom) => {
 
 }
 
+const eliminarMatriculado = (valor) => {
+	listar(tipo = 'matriculados');
+	datosmatriculado = valor.split("+")
+	let indice = lista.findIndex(buscar => (buscar.documento == parseInt(datosmatriculado[0]) && buscar.curso == datosmatriculado[1]));
+	if (indice < 0) {
+		return 'No existe';
+	}
+	else {
+		lista.splice(indice, 1)
+		guardar(tipo = 'matriculados');
+		return 'Elemento borrado';
+	}
+}
+
 module.exports = {
 	registrarUsuario,
 	registrarCurso,
 	registrarUsuarioAcurso,
 	mostrarCursos,
+	mostrarUsuarios,
+	cambiarRol,
 	mostrarCursosDisponibles,
+	mostrarInscritos,
+	eliminarMatriculado,
 	actualizar,
 	eliminar
 }

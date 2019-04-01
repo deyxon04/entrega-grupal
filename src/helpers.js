@@ -14,6 +14,14 @@ hbs.registerHelper('registrarUsuarioAcurso',(documento,nombre,correo,telefono,cu
     return funciones.registrarUsuarioAcurso(documento,nombre,correo,telefono,curso)
 })
 
+hbs.registerHelper('eliminarmatriculado',(value) =>{
+    return funciones.eliminarMatriculado(value)
+})
+
+hbs.registerHelper('cambiarRol',(value) =>{
+    return funciones.cambiarRol(value)
+})
+
 hbs.registerHelper('mostrarcursos',(items,options) =>{
     var out ='';
     items = funciones.mostrarCursos()
@@ -26,6 +34,24 @@ hbs.registerHelper('mostrarcursos',(items,options) =>{
 hbs.registerHelper('cursosdisponibles',(items,options) =>{
     var out = '';
     items = funciones.mostrarCursosDisponibles()
+    for(var i=0, l=items.length; i<l; i++) {
+        out = out + options.fn(items[i])
+    }
+    return out;
+});
+
+hbs.registerHelper('mostrarinscritos',(items,options) =>{
+    var out = '';
+    items = funciones.mostrarInscritos()
+    for(var i=0, l=items.length; i<l; i++) {
+        out = out + options.fn(items[i])
+    }
+    return out;
+});
+
+hbs.registerHelper('mostrarusuarios',(items,options) =>{
+    var out = '';
+    items = funciones.mostrarUsuarios()
     for(var i=0, l=items.length; i<l; i++) {
         out = out + options.fn(items[i])
     }

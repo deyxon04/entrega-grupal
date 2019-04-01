@@ -66,8 +66,33 @@ app.post('/registrarusuarioacurso', (req, res) => {
     })
 })
 
+app.post('/eliminarmatriculado',(req,res) =>{
+    res.render('eliminarmatriculado',{
+        value: req.body.boton
+    })
+    res.redirect(req.get('referer'));
+});
+
+app.post('/cambiarrol',(req,res) =>{
+    res.render('cambiarrol',{
+        value: req.body.boton
+    })
+    res.redirect(req.get('referer'));
+});
+
+
 app.get('/mostrarcursos',(req,res) =>{
     res.render('mostrarcursos',{
+    })
+});
+
+app.get('/mostrarinscritos',(req,res) =>{
+    res.render('mostrarinscritos',{
+    })
+});
+
+app.get('/mostrarusuarios',(req,res) =>{
+    res.render('mostrarusuarios',{
     })
 });
 
