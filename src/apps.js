@@ -25,7 +25,6 @@ app.post('/rol', (req, res) => {
         rol
       })
       break
-
     case 'aspirante':
       res.render('aspirante', {
         rol
@@ -87,10 +86,63 @@ app.get('/crearcurso', (req, res) => {
 app.get('/forminscripcionacurso', (req, res) => {
   res.render('forminscribirseacurso', {})
 })
+app.post('/eliminarmatriculado', (req, res) => {
+    res.render('eliminarmatriculado', {
+        value: req.body.boton
+    })
+    res.redirect(req.get('referer'));
+});
+
+app.post('/cambiarrol', (req, res) => {
+    res.render('cambiarrol', {
+        value: req.body.boton
+    })
+    res.redirect(req.get('referer'));
+});
+
+
+app.get('/mostrarcursos', (req, res) => {
+    res.render('mostrarcursos', {
+    })
+});
+
+app.get('/mostrarinscritos', (req, res) => {
+    res.render('mostrarinscritos', {
+    })
+});
+
+app.get('/mostrarusuarios', (req, res) => {
+    res.render('mostrarusuarios', {
+    })
+});
+
+app.get('/crearcurso', (req, res) => {
+    res.render('formcreacioncurso', {
+    })
+});
+
+app.get('/forminscripcionacurso', (req, res) => {
+    res.render('forminscribirseacurso', {
+    })
+});
 
 app.post('/formregistrousuario', (req, res) => {
   res.render('formregistrousuario', {})
 })
+
+app.post('/cursoporaspirante', (req, res) => {
+    res.render('eliminarCurso', {
+        documento: req.body.documento
+    })
+ });
+
+
+app.post('/eliminarCurso', (req, res) => {
+    res.render('eliminarCursoPost', {
+        nombre: req.body.boton,
+        curso: req.body.curso
+    })
+ });
 
 app.listen(3000, () => {
   console.log('Escuchando en el puerto 3000')

@@ -1,0 +1,25 @@
+{{>header}}
+<table>
+            <thead>
+               <th>Documento</th> 
+               <th>Nombre</th> 
+               <th>Correo</th>
+               <th>Telefono</th>
+               <th>Tipo</th> 
+            </thead>
+            <tbody>
+                {{#mostrarusuarios this}}
+                    <tr>
+                      <td>{{documento}}</td> 
+                      <td>{{nombre}}</td>
+                      <td>{{correo}}</td>
+                      <td>{{telefono}}</td>
+                      <td>{{tipo}}</td>
+                      <form action="/cambiarrol" method="POST">
+                      <td><button type="submit" name="boton" value={{documento}}+{{tipo}} class="btn btn-danger">Cambiar rol</button></td></tr>
+                      </form>
+                    </tr>
+                {{/mostrarusuarios}}
+            </tbody>
+        </table>
+{{>footer}}

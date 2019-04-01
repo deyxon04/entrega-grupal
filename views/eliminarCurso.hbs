@@ -1,0 +1,23 @@
+{{>header}}
+<table>
+          <thead>
+               <th>Documento</th> 
+               <th>Nombre del curso</th> 
+               <th>Correo</th>
+               <th>Curso</th> 
+            </thead>
+            <tbody>
+                {{#desplegable documento}}
+                    <tr>
+                      <td>{{documento}}</td> 
+                      <td>{{nombre}}</td>
+                      <td>{{correo}}</td>
+                      <td>{{curso}}</td>
+                      <form action="/eliminarCurso" method="POST">
+                      <td><button type="submit" name="boton" value={{documento}}+{{curso}} class="btn btn-danger">Eliminar</button></td></tr>
+                      </form>
+                    </tr>
+                {{/desplegable}}
+            </tbody>
+        </table>
+{{>footer}}

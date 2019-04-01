@@ -83,3 +83,59 @@ hbs.registerHelper('cursosdisponibles', (items, options) => {
   }
   return out
 })
+hbs.registerHelper('eliminarmatriculado',(value) =>{
+    return funciones.eliminarMatriculado(value)
+})
+
+hbs.registerHelper('cambiarRol',(value) =>{
+    return funciones.cambiarRol(value)
+})
+
+hbs.registerHelper('mostrarcursos',(items,options) =>{
+    var out ='';
+    items = funciones.mostrarCursos()
+    for(var i=0, l=items.length; i<l; i++) {
+        out = out + options.fn(items[i])
+    }
+    return out;
+});
+
+hbs.registerHelper('cursosdisponibles',(items,options) =>{
+    var out = '';
+    items = funciones.mostrarCursosDisponibles()
+    for(var i=0, l=items.length; i<l; i++) {
+        out = out + options.fn(items[i])
+    }
+    return out;
+});
+
+hbs.registerHelper('mostrarinscritos',(items,options) =>{
+    var out = '';
+    items = funciones.mostrarInscritos()
+    for(var i=0, l=items.length; i<l; i++) {
+        out = out + options.fn(items[i])
+    }
+    return out;
+});
+
+ hbs.registerHelper('desplegable', (items,options) => {
+    var out = '';
+    items = funciones.mostrarCursosPorUsuario(items)
+    for(var i=0, l=items.length; i<l; i++) {
+        out = out + options.fn(items[i])
+    }
+    return out;
+});
+
+hbs.registerHelper('mostrarusuarios',(items,options) =>{
+    var out = '';
+    items = funciones.mostrarUsuarios()
+    for(var i=0, l=items.length; i<l; i++) {
+        out = out + options.fn(items[i])
+    }
+    return out;
+});
+
+hbs.registerHelper('eliminarCurso',(value) => {
+    return funciones.eliminarMatriculado(value)
+})
