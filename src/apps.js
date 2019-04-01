@@ -1,91 +1,97 @@
 const express = require('express')
 const app = express()
-const path = require('path');
-const hbs = require('hbs');
+const path = require('path')
+const hbs = require('hbs')
 const bodyParser = require('body-parser')
-require('./helpers'); //Llamado al helper para saber donde esta ubicado el helper
+require('./helpers') // Llamado al helper para saber donde esta ubicado el helper
 
 const directoriopublico = path.join(__dirname, '../public')
 const directoriopartials = path.join(__dirname, '../partials')
-app.use(express.static(directoriopublico));
+app.use(express.static(directoriopublico))
 app.use(bodyParser.urlencoded({ extended: false }))
-hbs.registerPartials(directoriopartials);
+hbs.registerPartials(directoriopartials)
 
-app.set('view engine', 'hbs');
-
+app.set('view engine', 'hbs')
 
 app.get('/', (req, res) => {
-    res.render('index', {
-    });
-});
-
-app.post('/rol', (req, res) => {
-    rol = req.body.roles
-    switch (req.body.roles){
-        case 'coordinador':
-        res.render('coordinador',{
-            rol
-        })
-        break
-        
-        case 'aspirante':
-        res.render('aspirante',{
-            rol
-        })
-        break
-    }
+  res.render('index', {})
 })
 
+app.post('/rol', (req, res) => {
+  rol = req.body.roles
+  switch (req.body.roles) {
+    case 'coordinador':
+      res.render('coordinador', {
+        rol
+      })
+      break
+
+    case 'aspirante':
+      res.render('aspirante', {
+        rol
+      })
+      break
+    case 'interesado':
+      res.render('interesado', {
+        rol
+      })
+  }
+})
 
 app.post('/registrarusuario', (req, res) => {
-    res.render('registrarusuario', {
-        documento: parseInt(req.body.documento),
-        nombre: req.body.nombre,
-        correo: req.body.correo,
-        telefono: req.body.telefono
-    })
+  res.render('registrarusuario', {
+    documento: parseInt(req.body.documento),
+    nombre: req.body.nombre,
+    correo: req.body.correo,
+    telefono: req.body.telefono
+  })
 })
 
 app.post('/registrarcurso', (req, res) => {
-    res.render('registrarcurso', {
-        nombrecurso: req.body.nomcurso,
-        idcurso: parseInt(req.body.idcurso),
-        descripcion: req.body.descripcion,
-        valor: parseInt(req.body.valor),
-        modalidad: req.body.modalidad,
-        intensidad: req.body.intensidad
-    })
+  res.render('registrarcurso', {
+    nombrecurso: req.body.nomcurso,
+    idcurso: parseInt(req.body.idcurso),
+    descripcion: req.body.descripcion,
+    valor: parseInt(req.body.valor),
+    modalidad: req.body.modalidad,
+    intensidad: req.body.intensidad
+  })
 })
 
 app.post('/registrarusuarioacurso', (req, res) => {
-    res.render('registrarusuarioacurso', {
-        documento: parseInt(req.body.documento),
-        nombre: req.body.nombre,
-        correo: req.body.correo,
-        curso: req.body.curso,
-    })
+  res.render('registrarusuarioacurso', {
+    documento: parseInt(req.body.documento),
+    nombre: req.body.nombre,
+    correo: req.body.correo,
+    curso: req.body.curso
+  })
 })
 
-app.get('/mostrarcursos',(req,res) =>{
-    res.render('mostrarcursos',{
-    })
-});
+app.post('/vercurso', (req, res) => {
+  console.log(req.body.id)
+  res.render('vercursos', { idcurso: req.body.id })
+})
 
-app.get('/crearcurso',(req,res) =>{
-    res.render('formcreacioncurso',{
-    })
-});
+app.get('/mostrarcursos', (req, res) => {
+  res.render('mostrarcursos', {})
+})
 
-app.get('/forminscripcionacurso',(req,res) =>{
-    res.render('forminscribirseacurso',{
-    })
-});
+app.get('/mostrarcursosInteresados', (req, res) => {
+  res.render('mostrarcursosInteresados', {})
+})
+
+app.get('/crearcurso', (req, res) => {
+  res.render('formcreacioncurso', {})
+})
+
+app.get('/forminscripcionacurso', (req, res) => {
+  res.render('forminscribirseacurso', {})
+})
 
 app.post('/formregistrousuario', (req, res) => {
-    res.render('formregistrousuario', {
-    })
-});
+  res.render('formregistrousuario', {})
+})
 
 app.listen(3000, () => {
-    console.log('Escuchando en el puerto 3000')
-});
+  console.log('Escuchando en el puerto 3000')
+})
