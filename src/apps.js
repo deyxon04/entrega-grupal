@@ -21,18 +21,18 @@ app.get('/', (req, res) => {
 
 app.post('/rol', (req, res) => {
     rol = req.body.roles
-    switch (req.body.roles){
+    switch (req.body.roles) {
         case 'coordinador':
-        res.render('coordinador',{
-            rol
-        })
-        break
-        
+            res.render('coordinador', {
+                rol
+            })
+            break
+
         case 'aspirante':
-        res.render('aspirante',{
-            rol
-        })
-        break
+            res.render('aspirante', {
+                rol
+            })
+            break
     }
 })
 
@@ -66,43 +66,43 @@ app.post('/registrarusuarioacurso', (req, res) => {
     })
 })
 
-app.post('/eliminarmatriculado',(req,res) =>{
-    res.render('eliminarmatriculado',{
+app.post('/eliminarmatriculado', (req, res) => {
+    res.render('eliminarmatriculado', {
         value: req.body.boton
     })
     res.redirect(req.get('referer'));
 });
 
-app.post('/cambiarrol',(req,res) =>{
-    res.render('cambiarrol',{
+app.post('/cambiarrol', (req, res) => {
+    res.render('cambiarrol', {
         value: req.body.boton
     })
     res.redirect(req.get('referer'));
 });
 
 
-app.get('/mostrarcursos',(req,res) =>{
-    res.render('mostrarcursos',{
+app.get('/mostrarcursos', (req, res) => {
+    res.render('mostrarcursos', {
     })
 });
 
-app.get('/mostrarinscritos',(req,res) =>{
-    res.render('mostrarinscritos',{
+app.get('/mostrarinscritos', (req, res) => {
+    res.render('mostrarinscritos', {
     })
 });
 
-app.get('/mostrarusuarios',(req,res) =>{
-    res.render('mostrarusuarios',{
+app.get('/mostrarusuarios', (req, res) => {
+    res.render('mostrarusuarios', {
     })
 });
 
-app.get('/crearcurso',(req,res) =>{
-    res.render('formcreacioncurso',{
+app.get('/crearcurso', (req, res) => {
+    res.render('formcreacioncurso', {
     })
 });
 
-app.get('/forminscripcionacurso',(req,res) =>{
-    res.render('forminscribirseacurso',{
+app.get('/forminscripcionacurso', (req, res) => {
+    res.render('forminscribirseacurso', {
     })
 });
 
