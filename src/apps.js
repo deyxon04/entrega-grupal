@@ -111,6 +111,20 @@ app.post('/formregistrousuario', (req, res) => {
     })
 });
 
+app.post('/cursoporaspirante', (req, res) => {
+    res.render('eliminarCurso', {
+        documento: req.body.documento
+    })
+ });
+
+
+app.post('/eliminarCurso', (req, res) => {
+    res.render('eliminarCursoPost', {
+        nombre: req.body.boton,
+        curso: req.body.curso
+    })
+ });
+
 app.listen(3000, () => {
     console.log('Escuchando en el puerto 3000')
 });

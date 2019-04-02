@@ -49,6 +49,15 @@ hbs.registerHelper('mostrarinscritos',(items,options) =>{
     return out;
 });
 
+ hbs.registerHelper('desplegable', (items,options) => {
+    var out = '';
+    items = funciones.mostrarCursosPorUsuario(items)
+    for(var i=0, l=items.length; i<l; i++) {
+        out = out + options.fn(items[i])
+    }
+    return out;
+});
+
 hbs.registerHelper('mostrarusuarios',(items,options) =>{
     var out = '';
     items = funciones.mostrarUsuarios()
@@ -57,3 +66,7 @@ hbs.registerHelper('mostrarusuarios',(items,options) =>{
     }
     return out;
 });
+
+hbs.registerHelper('eliminarCurso',(value) => {
+    return funciones.eliminarMatriculado(value)
+})

@@ -110,6 +110,13 @@ const mostrarCursos = () => {
 	return lista
 }
 
+const mostrarCursosPorUsuario = (documento) => {
+	listar(tipo = 'matriculados');
+    let cursosaspirante = lista.filter(buscar => buscar.documento == parseInt(documento))
+	return cursosaspirante
+}
+
+
 const mostrarCursosDisponibles = () => {
 	listar(tipo = 'cursos');
 	let est = lista.filter(cursos => cursos.estado === 'disponible')
@@ -156,30 +163,17 @@ const cambiarRol = (valor) => {
 	}
 }
 
-const eliminar = (nom) => {
-	listar()
-	let nuevo = lista.filter(mat => mat.nombre != nom)
-	if (nuevo.length == lista.length) {
-		console.log('ningun estudiante tiene el nombre indicado')
-	}
-	else {
-		lista = nuevo
-		guardar()
-	}
-
-}
-
 const eliminarMatriculado = (valor) => {
 	listar(tipo = 'matriculados');
 	datosmatriculado = valor.split("+")
 	let indice = lista.findIndex(buscar => (buscar.documento == parseInt(datosmatriculado[0]) && buscar.curso == datosmatriculado[1]));
 	if (indice < 0) {
-		return 'No existe';
+		return 'No existe el elemento';
 	}
 	else {
 		lista.splice(indice, 1)
 		guardar(tipo = 'matriculados');
-		return 'Elemento borrado';
+		return 'Registro borrado';
 	}
 }
 
@@ -193,6 +187,6 @@ module.exports = {
 	mostrarCursosDisponibles,
 	mostrarInscritos,
 	eliminarMatriculado,
+	mostrarCursosPorUsuario,
 	actualizar,
-	eliminar
 }
