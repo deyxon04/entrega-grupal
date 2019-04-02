@@ -1,0 +1,28 @@
+{{>header}}
+<h1>cursos disponibles</h1>
+<table>
+    <thead>
+        <th>Nombre</th>
+        <th>Descripcion</th>
+        <th>Valor</th>
+        <th>Ver cursos</th>
+    </thead>
+    <tbody>
+        {{#mostrarcursos this}}
+        <tr>
+            <td>{{nombrecurso}}</td>
+            <td>{{descripcion}}</td>
+            <td>{{valor}}</td>
+            <td>
+                <form action="/vercurso" method="post">
+                    <select name="id">
+                        <option value="{{idcurso}}">Ver</option>
+                    </select>
+                    <input type="submit" name='preinscribir'>
+                </form>
+            </td>
+        </tr>
+        {{/mostrarcursos}}
+    </tbody>
+</table>
+{{>footer}}

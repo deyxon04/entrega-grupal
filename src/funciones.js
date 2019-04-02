@@ -177,6 +177,12 @@ const eliminarMatriculado = (valor) => {
 	}
 }
 
+const vercurso = idcurso => {
+	listar((tipo = 'cursos'))
+	let curso = lista.find(id => id.idcurso == idcurso.data.root.idcurso)
+	return curso
+	}
+
 module.exports = {
 	registrarUsuario,
 	registrarCurso,
@@ -188,5 +194,6 @@ module.exports = {
 	mostrarInscritos,
 	eliminarMatriculado,
 	mostrarCursosPorUsuario,
+	vercurso,
 	actualizar,
 }

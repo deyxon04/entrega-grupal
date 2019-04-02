@@ -33,6 +33,10 @@ app.post('/rol', (req, res) => {
                 rol
             })
             break
+        case 'interesado':
+            res.render('interesado', {
+              rol
+            })
     }
 })
 
@@ -86,6 +90,7 @@ app.get('/mostrarcursos', (req, res) => {
     })
 });
 
+
 app.get('/mostrarinscritos', (req, res) => {
     res.render('mostrarinscritos', {
     })
@@ -124,6 +129,14 @@ app.post('/eliminarCurso', (req, res) => {
         curso: req.body.curso
     })
  });
+
+ app.post('/vercurso', (req, res) => {
+  res.render('vercursos', { idcurso: req.body.id })
+  })
+
+app.get('/mostrarcursosInteresados', (req, res) => {
+    res.render('mostrarcursosInteresados', {})
+  })
 
 app.listen(3000, () => {
     console.log('Escuchando en el puerto 3000')

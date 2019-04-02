@@ -70,3 +70,17 @@ hbs.registerHelper('mostrarusuarios',(items,options) =>{
 hbs.registerHelper('eliminarCurso',(value) => {
     return funciones.eliminarMatriculado(value)
 })
+
+hbs.registerHelper('mostrarcursosInteresados', (items, options) => {
+    var out = ''
+    items = funciones.mostrarCursos()
+    for (var i = 0, l = items.length; i < l; i++) {
+    out = out + options.fn(items[i])
+    }
+    return out
+})
+
+hbs.registerHelper('vercursos', idcurso => {
+    curso = funciones.vercurso(idcurso)
+    return JSON.stringify(curso)
+    })
